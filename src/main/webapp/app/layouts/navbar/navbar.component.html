@@ -1,9 +1,9 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+<nav data-cy="navbar" class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-      <span class="logo-img"></span>
+      <img src="/content/images/brac-logo.png" class="logo-img" alt="BRAC logo" />
       <span class="navbar-title" jhiTranslate="global.title">Epms</span>
-      <span class="navbar-version">{{ version }}</span>
+      <!--      <span class="navbar-version">{{ version }}</span>-->
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -34,17 +34,36 @@
             <a class="nav-link" routerLink="/feedback-request-form" (click)="collapseNavbar()">
               <span>
                 <fa-icon icon="Feedback Requeste Form"></fa-icon>
-                <span jhiTranslate="feedbackRequestForm.title">Feedback Request Form</span>
+                <span>Feedback Request Form</span>
               </span>
             </a>
           </li>
 
-          <!--          Feedback Supervisee List-->
+          <!--                    Feedback Supervisee List-->
           <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link" routerLink="/feedback-supervisee" (click)="collapseNavbar()">
+            <a class="nav-link" routerLink="/feedback-supervisee-list" (click)="collapseNavbar()">
               <span>
                 <fa-icon icon="asterisk"></fa-icon>
                 <span>Feedback Supervisee List</span>
+              </span>
+            </a>
+          </li>
+          <!--          Feedback Requestee List-->
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/feedback-requestee" (click)="collapseNavbar()">
+              <span>
+                <fa-icon icon="asterisk"></fa-icon>
+                <span>Feedback Requestee List</span>
+              </span>
+            </a>
+          </li>
+
+          <!--          Feedback Report View-->
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/feedback-report-view" (click)="collapseNavbar()">
+              <span>
+                <fa-icon icon="asterisk"></fa-icon>
+                <span>Feedback Report View</span>
               </span>
             </a>
           </li>

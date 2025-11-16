@@ -183,6 +183,7 @@ export class FeedbackRequestFormComponent implements OnInit {
       res => {
         if (res && res.length > 0) {
           this.selectedResponders = res.map(r => ({
+            id: r.id,
             category: r.category,
             employee: r.employee,
             stakeholderEmail: r.stakeholderEmail,
@@ -314,6 +315,25 @@ export class FeedbackRequestFormComponent implements OnInit {
         console.error('Stakeholder email is required');
         return;
       }
+
+      // Check if the email already exists in selectedResponders
+      const isDuplicateEmail = this.selectedResponders.some(
+        responder =>
+          responder.category === ResponderCategory.STAKEHOLDER && responder.stakeholderEmail?.toLowerCase() === email.toLowerCase(),
+      );
+      console.log(isDuplicateEmail);
+
+      if (isDuplicateEmail) {
+        // You can handle this in different ways:
+
+        // Option 1: Show an error message (you'll need to add a method to show errors)
+        // this.showErrorMessage('This stakeholder email has already been added.');
+
+        // Option 2: Use console error
+        console.error('Stakeholder email already exists');
+
+        return;
+      }
       this.addToResponderTable(this.existingFeedback!, category, null, FeedbackStatus.NEW, email);
     } else {
       const employee = this.feedbackForm.get('employee')?.value;
@@ -346,7 +366,9 @@ export class FeedbackRequestFormComponent implements OnInit {
     console.log(responder);
     this.responderService.create(responder).subscribe(
       res => {
+        console.log('new responder', res);
         this.selectedResponders.push({
+          id: res.body!.id,
           category,
           employee: employee,
           stakeholderEmail,
@@ -408,6 +430,7 @@ export class FeedbackRequestFormComponent implements OnInit {
           employee: responder.employee ? { id: responder.employee.id } : null,
           feedback: { id: this.existingFeedback!.id },
         };
+        console.log('updated Responder List', updatedResponder);
         this.responderService.update(updatedResponder).subscribe(
           res => {
             this.selectedResponders[index] = {

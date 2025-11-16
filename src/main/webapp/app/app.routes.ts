@@ -8,7 +8,11 @@ import HomeComponent from './home/home.component';
 import NavbarComponent from './layouts/navbar/navbar.component';
 import LoginComponent from './login/login.component';
 import { FeedbackRequestFormComponent } from './feedback-request-form/feedback-request-form.component';
-import { FeedbackSuperviseeListComponent } from './feedback-review/feedback-supervisee-list/feedback-supervisee-list.component';
+import { FeedbackSuperviseeListComponent } from './feedback-review-supervisor/feedback-supervisee-list/feedback-supervisee-list.component';
+import { FeedbackReviewSupervisorComponent } from './feedback-review-supervisor/feedback-review-supervisor.component';
+import { FeedbackPreviewListComponent } from './feedback-preview-list/feedback-preview-list.component';
+import { FeedbackAssessmentFormComponent } from './feedback-assessment-form/feedback-assessment-form.component';
+import { FeedbackReportComponent } from './feedback-report/feedback-report.component';
 
 const routes: Routes = [
   {
@@ -19,11 +23,31 @@ const routes: Routes = [
   {
     path: 'feedback-request-form',
     component: FeedbackRequestFormComponent,
-    title: 'feedbackRequestForm.title',
+    title: 'Feedback Request Form',
   },
   {
-    path: 'feedback-supervisee',
+    path: 'feedback-supervisee-list',
     component: FeedbackSuperviseeListComponent,
+    title: 'Feedback Supervisee List',
+  },
+  {
+    path: 'feedback-review-form/:feedbackId',
+    component: FeedbackReviewSupervisorComponent,
+  },
+  {
+    path: 'feedback-requestee',
+    component: FeedbackPreviewListComponent,
+    title: 'Feedback Requestee List',
+  },
+  {
+    path: 'feedback-assessment-form/:responderId',
+    component: FeedbackAssessmentFormComponent,
+    title: 'Feedback Assessment Form',
+  },
+  {
+    path: 'feedback-report-view',
+    component: FeedbackReportComponent,
+    title: 'Feedback Report View',
   },
   {
     path: '',

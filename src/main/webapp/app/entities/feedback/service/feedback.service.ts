@@ -9,6 +9,9 @@ import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IFeedback, NewFeedback } from '../feedback.model';
+import { FeedbackStatus } from '../../enumerations/feedback-status.model';
+import { ResponderCategory } from 'app/entities/enumerations/responder-category.model';
+import { IEmployee } from '../../employee/employee.model';
 
 export type PartialUpdateFeedback = Partial<IFeedback> & Pick<IFeedback, 'id'>;
 
@@ -73,6 +76,16 @@ export class FeedbackService {
 
   getFeedbackIdentifier(feedback: Pick<IFeedback, 'id'>): number {
     return feedback.id;
+  }
+
+  searchEmployees(category: keyof typeof ResponderCategory, currentUserPin: string): Observable<HttpResponse<IEmployee[]>> {
+    return this.http.get<IEmployee[]>(`${this.resourceUrl}/employees/eligible`, {
+      observe: 'response',
+      params: { category: category, currentUserPin: currentUserPin },
+    });
+  }
+  updateStatus(id: number, status: string): Observable<IFeedback> {
+    return this.http.put<IFeedback>(`${this.resourceUrl}/${id}/${status}/update-status`, { observe: 'response' });
   }
 
   compareFeedback(o1: Pick<IFeedback, 'id'> | null, o2: Pick<IFeedback, 'id'> | null): boolean {

@@ -17,19 +17,19 @@
 *.ejs           text
 *.html          text
 *.java          text
-*.js            text
-*.json          text
+*.js            text eol=lf
+*.json          text eol=lf
 *.less          text
 *.properties    text
 *.sass          text
-*.scss          text
+*.scss          text eol=lf
 *.sh            text eol=lf
 *.sql           text
 *.txt           text
-*.ts            text
-*.xml           text
-*.yaml          text
-*.yml           text
+*.ts            text eol=lf
+*.xml           text eol=lf
+*.yaml          text eol=lf
+*.yml           text eol=lf
 
 # Documents
 *.doc           diff=astextplain
@@ -148,3 +148,7 @@ Procfile        text
 *.otf           binary
 *.woff          binary
 *.woff2         binary
+
+# Force CRLF for Windows-specific files
+*.bat text eol=crlf
+*.cmd text eol=crlf

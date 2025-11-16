@@ -15,6 +15,7 @@ import { Account } from 'app/core/auth/account.model';
   imports: [SharedModule, RouterModule],
 })
 export default class HomeComponent implements OnInit, OnDestroy {
+  isShowing: boolean = true;
   account = signal<Account | null>(null);
 
   private readonly destroy$ = new Subject<void>();
@@ -36,5 +37,12 @@ export default class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  showAlertMessage(): boolean {
+    setTimeout(() => {
+      this.isShowing = false;
+    }, 2000);
+    return this.isShowing;
   }
 }

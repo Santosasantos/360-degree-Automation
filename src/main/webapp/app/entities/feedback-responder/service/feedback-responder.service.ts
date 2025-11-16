@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IFeedbackResponder, NewFeedbackResponder } from '../feedback-responder.model';
+import { FeedbackStatus } from '../../enumerations/feedback-status.model';
 
 export type PartialUpdateFeedbackResponder = Partial<IFeedbackResponder> & Pick<IFeedbackResponder, 'id'>;
 
@@ -41,6 +42,22 @@ export class FeedbackResponderService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IFeedbackResponder>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  updateResponderStatus(id: number, responderStatus: string): Observable<IFeedbackResponder> {
+    return this.http.put<IFeedbackResponder>(`/${this.resourceUrl}/${id}/${responderStatus}/update-responder-status`, {
+      observe: 'response',
+    });
+  }
+
+  getRequesteeList(responderPin: string, year: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IFeedbackResponder[]>(`/${this.resourceUrl}/requester`, {
+      observe: 'response',
+      params: { responderpin: responderPin, year: year },
+    });
+  }
+  findFeedbackResponders(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IFeedbackResponder[]>(`${this.resourceUrl}/responderswithfeedback/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

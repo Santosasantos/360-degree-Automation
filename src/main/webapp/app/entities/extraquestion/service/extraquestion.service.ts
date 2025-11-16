@@ -39,6 +39,10 @@ export class ExtraquestionService {
     return this.http.get<IExtraquestion>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByFeedbackId(feedbackId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IExtraquestion[]>(`${this.resourceUrl}/feedback`, { observe: 'response', params: { feedbackId } });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IExtraquestion[]>(this.resourceUrl, { params: options, observe: 'response' });
